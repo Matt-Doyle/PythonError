@@ -47,7 +47,7 @@
         <dependency>
             <groupId>org.fxmisc.richtext</groupId>
             <artifactId>richtextfx</artifactId>
-            <version>0.6.10</version>
+            <version>0.7-M1</version>
         </dependency>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
