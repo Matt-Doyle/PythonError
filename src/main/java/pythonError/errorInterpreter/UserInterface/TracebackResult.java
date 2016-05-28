@@ -3,13 +3,11 @@ package pythonError.errorInterpreter.UserInterface;
 /**
  * Created by Matthew Doyle on 28/05/2016.
  */
-
+import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import javafx.scene.layout.VBox;
 
-import org.fxmisc.flowless.VirtualizedScrollPane;
-
-public class TracebackEntry {
+public class TracebackResult {
 
     private String m_Text;
     private InlineCssTextArea RichTextEntry;
