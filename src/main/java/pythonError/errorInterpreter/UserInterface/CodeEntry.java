@@ -3,22 +3,26 @@ package pythonError.errorInterpreter.UserInterface;
 /**
  * Created by Matthew Doyle on 28/05/2016.
  */
-import org.fxmisc.flowless.VirtualizedScrollPane;
-import org.fxmisc.richtext.InlineCssTextArea;
+
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 import javafx.scene.layout.VBox;
 
-public class TracebackResult {
+import org.fxmisc.flowless.VirtualizedScrollPane;
+
+public class CodeEntry {
 
     private String m_Text;
-    private InlineCssTextArea RichTextEntry;
+    private CodeArea RichTextEntry;
     private VBox parent;
 
     public boolean initialise(VBox parent) {
         this.parent = parent;
 
-        RichTextEntry = new InlineCssTextArea("Result");
-        RichTextEntry.setWrapText(true);
-        RichTextEntry.setEditable(false);
+        RichTextEntry = new CodeArea("Code Entry");
+        RichTextEntry.setWrapText(false);
+        RichTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(RichTextEntry));
+
         parent.getChildren().add(new VirtualizedScrollPane(RichTextEntry));
         return true;
     }
@@ -29,7 +33,6 @@ public class TracebackResult {
 
     public void setText(String strText) {
         m_Text = strText;
-        RichTextEntry.setAccessibleText(strText);
     }
 
     public String getText() {

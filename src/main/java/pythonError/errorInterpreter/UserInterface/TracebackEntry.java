@@ -18,7 +18,7 @@ public class TracebackEntry {
     public boolean initialise(VBox parent) {
         this.parent = parent;
 
-        RichTextEntry = new InlineCssTextArea("Test");
+        RichTextEntry = new InlineCssTextArea("Stack Traceback Entry");
         RichTextEntry.setWrapText(true);
 
         parent.getChildren().add(new VirtualizedScrollPane(RichTextEntry));
