@@ -1,21 +1,23 @@
-package pythonError.errorInterpreter.UserInterface;
+package pythonError.errorInterpreter.userInterface;
 
 /**
  * Created by Matthew Doyle on 28/05/2016.
  */
 
-import org.fxmisc.richtext.InlineCssTextArea;
+import org.fxmisc.richtext.CodeArea;
+import org.fxmisc.richtext.LineNumberFactory;
 import javafx.scene.layout.VBox;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 
-public class TracebackEntry {
+public class CodeEntry {
 
     private String input;
 
     public void initialise(VBox parent) {
-        InlineCssTextArea richTextEntry = new InlineCssTextArea("Stack Traceback Entry");
-        richTextEntry.setWrapText(true);
+        CodeArea richTextEntry = new CodeArea("Code Entry");
+        richTextEntry.setWrapText(false);
+        richTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(richTextEntry));
 
         parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
     }

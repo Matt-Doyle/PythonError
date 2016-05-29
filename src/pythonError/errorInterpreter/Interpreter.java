@@ -7,9 +7,9 @@ package pythonError.errorInterpreter;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-import pythonError.errorInterpreter.UserInterface.UserInterfaceManager;
+import pythonError.errorInterpreter.userInterface.UserInterfaceManager;
 
-public class interpreter extends Application {
+public class Interpreter extends Application {
 
     private UserInterfaceManager uiManager;
 

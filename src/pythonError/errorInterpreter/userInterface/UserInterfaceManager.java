@@ -1,4 +1,4 @@
-package pythonError.errorInterpreter.UserInterface;
+package pythonError.errorInterpreter.userInterface;
 
 /**
  * Created by Matthew Doyle on 28/05/2016.

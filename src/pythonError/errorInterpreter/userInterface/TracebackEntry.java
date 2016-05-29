@@ -1,30 +1,30 @@
-package pythonError.errorInterpreter.UserInterface;
+package pythonError.errorInterpreter.userInterface;
 
 /**
  * Created by Matthew Doyle on 28/05/2016.
  */
 
-import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
 import javafx.scene.layout.VBox;
 
-public class TracebackResult {
+import org.fxmisc.flowless.VirtualizedScrollPane;
 
-    private String result;
+public class TracebackEntry {
+
+    private String input;
 
     public void initialise(VBox parent) {
-        InlineCssTextArea richTextEntry = new InlineCssTextArea("Result");
+        InlineCssTextArea richTextEntry = new InlineCssTextArea("Stack Traceback Entry");
         richTextEntry.setWrapText(true);
-        richTextEntry.setEditable(false);
+
         parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
     }
 
     public void setText(String strText) {
-        result = strText;
-//        richTextEntry.setAccessibleText(strText);
+        input = strText;
     }
 
     public String getText() {
-        return result;
+        return input;
     }
 }
