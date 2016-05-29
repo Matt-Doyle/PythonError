@@ -11,19 +11,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 
 public class UserInterfaceManager {
-    private VBox root;
-    private CodeEntry codeEntry;
-    private TracebackEntry tracebackEntry;
-    private TracebackResult tracebackResult;
 
-    public boolean initialise(Stage primaryStage) {
+    public void initialise(Stage primaryStage) {
         primaryStage.setTitle("Python Error Interpreter - By Matthew Doyle and Christopher Hall");
 
-        codeEntry = new CodeEntry();
-        tracebackEntry = new TracebackEntry();
-        tracebackResult = new TracebackResult();
+        CodeEntry codeEntry = new CodeEntry();
+        TracebackEntry tracebackEntry = new TracebackEntry();
+        TracebackResult tracebackResult = new TracebackResult();
 
-        root = new VBox(16); // 16px spacing
+        VBox root = new VBox(16);
 
         codeEntry.initialise(root);
         tracebackEntry.initialise(root);
@@ -34,8 +30,6 @@ public class UserInterfaceManager {
 
         primaryStage.setScene(new Scene(root, 500, 500));
         primaryStage.show();
-
-        return true;
     }
 
     public boolean shutdown() {

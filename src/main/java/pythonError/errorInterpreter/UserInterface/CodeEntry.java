@@ -12,30 +12,21 @@ import org.fxmisc.flowless.VirtualizedScrollPane;
 
 public class CodeEntry {
 
-    private String m_Text;
-    private CodeArea RichTextEntry;
-    private VBox parent;
+    private String input;
 
-    public boolean initialise(VBox parent) {
-        this.parent = parent;
+    public void initialise(VBox parent) {
+        CodeArea richTextEntry = new CodeArea("Code Entry");
+        richTextEntry.setWrapText(false);
+        richTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(richTextEntry));
 
-        RichTextEntry = new CodeArea("Code Entry");
-        RichTextEntry.setWrapText(false);
-        RichTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(RichTextEntry));
-
-        parent.getChildren().add(new VirtualizedScrollPane(RichTextEntry));
-        return true;
-    }
-
-    public boolean shutdown() {
-        return true;
+        parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
     }
 
     public void setText(String strText) {
-        m_Text = strText;
+        input = strText;
     }
 
     public String getText() {
-        return m_Text;
+        return input;
     }
 }

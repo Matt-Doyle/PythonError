@@ -11,29 +11,20 @@ import org.fxmisc.flowless.VirtualizedScrollPane;
 
 public class TracebackEntry {
 
-    private String m_Text;
-    private InlineCssTextArea RichTextEntry;
-    private VBox parent;
+    private String input;
 
-    public boolean initialise(VBox parent) {
-        this.parent = parent;
+    public void initialise(VBox parent) {
+        InlineCssTextArea richTextEntry = new InlineCssTextArea("Stack Traceback Entry");
+        richTextEntry.setWrapText(true);
 
-        RichTextEntry = new InlineCssTextArea("Stack Traceback Entry");
-        RichTextEntry.setWrapText(true);
-
-        parent.getChildren().add(new VirtualizedScrollPane(RichTextEntry));
-        return true;
-    }
-
-    public boolean shutdown() {
-        return true;
+        parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
     }
 
     public void setText(String strText) {
-        m_Text = strText;
+        input = strText;
     }
 
     public String getText() {
-        return m_Text;
+        return input;
     }
 }
