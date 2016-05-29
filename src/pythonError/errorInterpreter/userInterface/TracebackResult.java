@@ -12,11 +12,18 @@ public class TracebackResult {
 
     private String result;
 
-    public void initialise(VBox parent) {
-        InlineCssTextArea richTextEntry = new InlineCssTextArea("Result");
+    private VirtualizedScrollPane nodeObject;
+
+    public TracebackResult() {
+        InlineCssTextArea richTextEntry = new InlineCssTextArea();
         richTextEntry.setWrapText(true);
         richTextEntry.setEditable(false);
-        parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
+
+        nodeObject = new VirtualizedScrollPane(richTextEntry);
+    }
+
+    public VirtualizedScrollPane getNodeObject() {
+        return nodeObject;
     }
 
     public void setText(String strText) {

@@ -14,12 +14,18 @@ public class CodeEntry {
 
     private String input;
 
-    public void initialise(VBox parent) {
-        CodeArea richTextEntry = new CodeArea("Code Entry");
+    private VirtualizedScrollPane nodeObject;
+
+    public CodeEntry() {
+        CodeArea richTextEntry = new CodeArea();
         richTextEntry.setWrapText(false);
         richTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(richTextEntry));
 
-        parent.getChildren().add(new VirtualizedScrollPane(richTextEntry));
+        nodeObject = new VirtualizedScrollPane(richTextEntry);
+    }
+
+    public VirtualizedScrollPane getNodeObject() {
+        return nodeObject;
     }
 
     public void setText(String strText) {
