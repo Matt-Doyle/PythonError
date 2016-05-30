@@ -2,13 +2,15 @@ package pythonError.errorInterpreter.errorSearch;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Created by Matthew Doyle on 29/05/2016.
  */
 public class BoyerMoore { // Implementation derived from http://www.cs.utexas.edu/~moore/publications/fstrpos.pdf
-    public HashMap<Character, Number> GenerateBCRLookupTable(String Needle) {
-        HashMap<Character, Number> BCRMap = new HashMap<Character, Number>();
+
+    private static HashMap<Character, Number> GenerateBCRLookupTable(String Needle) {
+        HashMap<Character, Number> BCRMap = new HashMap<>();
 
         for (int i = 0; i < Needle.length(); i++) {
             char lookupCharacter = Needle.charAt(i);
@@ -17,7 +19,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         return BCRMap;
     }
 
-    public int[] GenerateGSRLookupTable(String Needle) {
+    private static int[] GenerateGSRLookupTable(String Needle) {
         int m = Needle.length();
 
         int[] suffixes = new int[m];
@@ -34,7 +36,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
                     g = i;
                 }
                 f = i;
-                while(g >= 0 && Needle.substring(g, g) == Needle.substring(g + m - 1 - f, g + m - 1 - f)) {
+                while(g >= 0 && Objects.equals(Needle.substring(g, g), Needle.substring(g + m - 1 - f, g + m - 1 - f))) {
                     g--;
                 }
                 suffixes[i] = f - g;
@@ -63,14 +65,14 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         return goodSuffixes;
     }
 
-    public ArrayList<Number> search(String needle, String haystack) {
+    public static ArrayList<Number> search(String needle, String haystack) {
         int[] GSR = GenerateGSRLookupTable(needle);
         HashMap<Character, Number> BCR = GenerateBCRLookupTable(needle);
         return precomputedSearch(needle, haystack, GSR, BCR);
     }
 
-    public ArrayList<Number> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Number> BCR) {
-        ArrayList<Number> result = new ArrayList<Number>();
+    public static ArrayList<Number> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Number> BCR) {
+        ArrayList<Number> result = new ArrayList<>();
         int m = needle.length();
         int offset = 0;
         int searchArea = haystack.length() - needle.length() - 1;
@@ -88,15 +90,13 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         return result;
     }
 
-    public BMPattern compile(String pattern) {
+    public static BMPattern compile(String pattern) {
         int[] GSR = GenerateGSRLookupTable(pattern);
         HashMap<Character, Number> BCR = GenerateBCRLookupTable(pattern);
         return new BMPattern(pattern, BCR, GSR);
     }
+
     public static void main(String[] args) {
-        BoyerMoore bm = new BoyerMoore();
-        for (Number i : bm.search("test", "testing testing testing")) {
-            System.out.println(i);
-        }
+        BoyerMoore.search("test", "testing, testing, testing, test").forEach(System.out::println);
     }
 }
