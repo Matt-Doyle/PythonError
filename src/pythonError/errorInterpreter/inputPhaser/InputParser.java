@@ -37,7 +37,7 @@ public class InputParser {
 	public static Error parseError(String traceback, Python pSearch) {
 		BMPattern error = pSearch.getExceptionList().get(0);
 		for (BMPattern bmPattern : pSearch.getExceptionList()) {
-			ArrayList<Integer> CharacterPositions = BoyerMoore.precomputedSearch(bmPattern.getPattern(), traceback, bmPattern.getGSRTable(), bmPattern.getBCRTable());
+			ArrayList<Integer> CharacterPositions = BoyerMoore.precomputeSearch(bmPattern.getPattern(), traceback, bmPattern.getBCRTable(), bmPattern.getGSRTable());
 			if (CharacterPositions.size() > 0) {
 				error = bmPattern;
 				break;
