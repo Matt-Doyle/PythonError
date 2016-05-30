@@ -7,10 +7,10 @@ import java.util.HashMap;
  */
 public class BMPattern {
     private String pattern;
-    private HashMap<Character, Number> badCharacterTable;
+    private HashMap<Character, Integer> badCharacterTable;
     private int[] goodSuffixTable;
 
-    BMPattern(String pattern, HashMap<Character, Number> badCharacterTable, int[] goodSuffixTable) {
+    BMPattern(String pattern, HashMap<Character, Integer> badCharacterTable, int[] goodSuffixTable) {
         this.pattern = pattern;
         this.badCharacterTable = badCharacterTable;
         this.goodSuffixTable = goodSuffixTable;
@@ -23,11 +23,11 @@ public class BMPattern {
         pattern = newPattern;
     }
 
-    public HashMap<Character, Number> getBCRTable() {
+    public HashMap<Character, Integer> getBCRTable() {
         return badCharacterTable;
     }
 
-    public void setBCRTable(HashMap<Character, Number> BCR) {
+    public void setBCRTable(HashMap<Character, Integer> BCR) {
         badCharacterTable = BCR;
     }
 
