@@ -8,18 +8,18 @@ import java.util.HashMap;
  */
 public class BoyerMoore { // Implementation derived from http://www.cs.utexas.edu/~moore/publications/fstrpos.pdf
 
-	private static HashMap<Character, Integer> generateBCRLookupTable(String needle) {
+	private static HashMap<Character, Integer> GenerateBCRLookupTable(String Needle) {
 		HashMap<Character, Integer> BCRMap = new HashMap<>();
 
-		for (int i = 0; i < needle.length(); i++) {
-			char lookupCharacter = needle.charAt(i);
-			BCRMap.put(lookupCharacter, Math.max(1, needle.length() - 1 - i));
+		for (int i = 0; i < Needle.length(); i++) {
+			char lookupCharacter = Needle.charAt(i);
+			BCRMap.put(lookupCharacter, Math.max(1, Needle.length() - 1 - i));
 		}
 		return BCRMap;
 	}
 
-	private static int[] generateGSRLookupTable(String needle) {
-		int m = needle.length();
+	private static int[] GenerateGSRLookupTable(String Needle) {
+		int m = Needle.length();
 
 		int[] suffixes = new int[m];
 
@@ -27,7 +27,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 		int f = 0;
 
 		int g = m - 1;
-		for (int i = m - 2; i >= 0; i--) {
+		for(int i = m - 2; i >= 0; i--) {
 			if (i > g && suffixes[i + m - 1 - f] < i - g) {
 				suffixes[i] = suffixes[i + m - 1 - f];
 			} else {
@@ -35,14 +35,14 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 					g = i;
 				}
 				f = i;
-				while (g >= 0 && needle.substring(g, g).equals(needle.substring(g + m - 1 - f, g + m - 1 - f))) {
+				while(g >= 0 && Needle.substring(g, g).equals(Needle.substring(g + m - 1 - f, g + m - 1 - f))) {
 					g--;
 				}
 				suffixes[i] = f - g;
 			}
 		}
 
-		int[] goodSuffixes = new int[needle.length()];
+		int[] goodSuffixes = new int[Needle.length()];
 
 		for (int goodSuffix : goodSuffixes) {
 			goodSuffixes[goodSuffix] = m;
@@ -65,8 +65,8 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 	}
 
 	public static ArrayList<Integer> search(String needle, String haystack) {
-		int[] GSR = generateGSRLookupTable(needle);
-		HashMap<Character, Integer> BCR = generateBCRLookupTable(needle);
+		int[] GSR = GenerateGSRLookupTable(needle);
+		HashMap<Character, Integer> BCR = GenerateBCRLookupTable(needle);
 		return precomputedSearch(needle, haystack, GSR, BCR);
 	}
 
@@ -83,19 +83,19 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 				result.add(offset);
 				offset += needle.length();
 			} else {
-				offset += Math.max(GSR[i], BCR.containsKey(haystack.charAt(i)) ? BCR.get(haystack.charAt(i)) : m);
+				offset += Math.max(GSR[i], BCR.containsKey(haystack.charAt(i)) ? BCR.get(haystack.charAt(i)).intValue() : 1);
 			}
 		}
 		return result;
 	}
 
 	public static BMPattern compile(String pattern) {
-		int[] GSR = generateGSRLookupTable(pattern);
-		HashMap<Character, Integer> BCR = generateBCRLookupTable(pattern);
+		int[] GSR = GenerateGSRLookupTable(pattern);
+		HashMap<Character, Integer> BCR = GenerateBCRLookupTable(pattern);
 		return new BMPattern(pattern, BCR, GSR);
 	}
 
 	public static void main(String[] args) {
-		BoyerMoore.search("test", "testing testing testing").forEach(System.out::println);
+		BoyerMoore.search("test", "test test test testing testing test test testing testing").forEach(System.out::println);
 	}
 }
