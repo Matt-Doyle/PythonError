@@ -15,9 +15,10 @@ public class CodeEntry {
     private String input;
 
     private VirtualizedScrollPane nodeObject;
+    private CodeArea richTextEntry;
 
     public CodeEntry() {
-        CodeArea richTextEntry = new CodeArea();
+        richTextEntry = new CodeArea();
         richTextEntry.setWrapText(false);
         richTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(richTextEntry));
 
@@ -29,10 +30,11 @@ public class CodeEntry {
     }
 
     public void setText(String strText) {
-        input = strText;
+        richTextEntry.clear();
+        richTextEntry.appendText(strText);
     }
 
     public String getText() {
-        return input;
+        return richTextEntry.getText();
     }
 }

@@ -8,8 +8,8 @@ import java.util.HashMap;
  */
 public class BoyerMoore { // Implementation derived from http://www.cs.utexas.edu/~moore/publications/fstrpos.pdf
 
-    private static HashMap<Character, Number> GenerateBCRLookupTable(String Needle) {
-        HashMap<Character, Number> BCRMap = new HashMap<>();
+    private static HashMap<Character, Integer> GenerateBCRLookupTable(String Needle) {
+        HashMap<Character, Integer> BCRMap = new HashMap<>();
 
         for (int i = 0; i < Needle.length(); i++) {
             char lookupCharacter = Needle.charAt(i);
@@ -64,17 +64,17 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         return goodSuffixes;
     }
 
-    public static ArrayList<Number> search(String needle, String haystack) {
+    public static ArrayList<Integer> search(String needle, String haystack) {
         int[] GSR = GenerateGSRLookupTable(needle);
-        HashMap<Character, Number> BCR = GenerateBCRLookupTable(needle);
+        HashMap<Character, Integer> BCR = GenerateBCRLookupTable(needle);
         return precomputedSearch(needle, haystack, GSR, BCR);
     }
 
-    private static ArrayList<Number> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Number> BCR) {
-        ArrayList<Number> result = new ArrayList<>();
+    private static ArrayList<Integer> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Integer> BCR) {
+        ArrayList<Integer> result = new ArrayList<>();
         int m = needle.length();
         int offset = 0;
-        int searchArea = haystack.length() - needle.length() - 1;
+        int searchArea = haystack.length() - needle.length() + 1;
         while (offset < searchArea) {
             int i = m - 1;
             while (i >= 0 && needle.charAt(i) == haystack.charAt(offset + i))

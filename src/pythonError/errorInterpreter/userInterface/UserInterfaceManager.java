@@ -11,6 +11,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.control.Button;
+import pythonError.errorInterpreter.errorSearch.BoyerMoore;
+
+import java.util.ArrayList;
 
 public class UserInterfaceManager {
 
@@ -34,6 +37,11 @@ public class UserInterfaceManager {
         // Buttons
         Button analyseButton = new Button();
         analyseButton.setText("Analyse Traceback");
+        analyseButton.setOnAction(event -> {
+            String needle = tracebackEntry.getText();
+            ArrayList<Integer> result = BoyerMoore.search(needle, codeEntry.getText());
+            tracebackResult.setText(result.size() == 0 ? "String " + needle + " not found" : "String " + needle + " at " + result);
+        });
 
         // Add all objects in correct order
         root.getChildren().addAll(codeLabel, codeEntry.getNodeObject(), tracebackEntryLabel, tracebackEntry.getNodeObject(), analyseButton, traebackResultLabel, tracebackResult.getNodeObject());

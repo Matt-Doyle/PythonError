@@ -9,26 +9,28 @@ import org.fxmisc.richtext.InlineCssTextArea;
 
 public class TracebackEntry {
 
-    private String input;
+	private String input;
 
-    private VirtualizedScrollPane nodeObject;
+	private VirtualizedScrollPane nodeObject;
+	private InlineCssTextArea richTextEntry;
 
-    public TracebackEntry() {
-        InlineCssTextArea richTextEntry = new InlineCssTextArea();
-        richTextEntry.setWrapText(true);
+	public TracebackEntry() {
+		richTextEntry = new InlineCssTextArea();
+		richTextEntry.setWrapText(true);
 
-        nodeObject = new VirtualizedScrollPane(richTextEntry);
-    }
+		nodeObject = new VirtualizedScrollPane(richTextEntry);
+	}
 
-    public VirtualizedScrollPane getNodeObject() {
-        return nodeObject;
-    }
+	public VirtualizedScrollPane getNodeObject() {
+		return nodeObject;
+	}
 
-    public void setText(String strText) {
-        input = strText;
-    }
+	public void setText(String strText) {
+		richTextEntry.clear();
+		richTextEntry.appendText(strText);
+	}
 
-    public String getText() {
-        return input;
-    }
+	public String getText() {
+		return richTextEntry.getText();
+	}
 }
