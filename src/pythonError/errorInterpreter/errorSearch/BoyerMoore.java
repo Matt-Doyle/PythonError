@@ -1,7 +1,6 @@
 package pythonError.errorInterpreter.errorSearch;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -87,6 +86,12 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
             }
         }
         return result;
+    }
+
+    public BMPattern compile(String pattern) {
+        int[] GSR = GenerateGSRLookupTable(pattern);
+        HashMap<Character, Number> BCR = GenerateBCRLookupTable(pattern);
+        return new BMPattern(pattern, BCR, GSR);
     }
     public static void main(String[] args) {
         BoyerMoore bm = new BoyerMoore();
