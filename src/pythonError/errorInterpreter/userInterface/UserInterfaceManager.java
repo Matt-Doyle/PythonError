@@ -5,24 +5,20 @@ package pythonError.errorInterpreter.userInterface;
  */
 
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-
 import javafx.scene.control.Button;
-import pythonError.errorInterpreter.errorSearch.BoyerMoore;
-import pythonError.errorInterpreter.errorSearch.BMPattern;
+import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import pythonError.errorInterpreter.inputPhaser.Error;
+import pythonError.errorInterpreter.inputPhaser.InputParser;
 import pythonError.errorInterpreter.pythonInterpreter.Python;
-
-import java.util.ArrayList;
-import java.util.Objects;
 
 public class UserInterfaceManager {
 
 	public void initialise(Stage primaryStage) {
 		primaryStage.setTitle("Python Error Interpreter - By Matthew Doyle and Christopher Hall");
-        Python pSearch = new Python(true);
+		Python pSearch = new Python(true);
 		// Create layout
 		VBox root = new VBox(12);
 		root.setPadding(new Insets(12));
@@ -41,21 +37,12 @@ public class UserInterfaceManager {
 		Button analyseButton = new Button();
 		analyseButton.setText("Analyse Traceback");
 		analyseButton.setOnAction(event -> {
-            for (BMPattern i : pSearch.getExceptionList()) {
-                ArrayList<Integer> CharacterPositions = BoyerMoore.precomputedSearch(i.getPattern(), tracebackEntry.getText(), i.getGSRTable(), i.getBCRTable());
-                if (CharacterPositions.size() > 0) {
-                    String explanation = pSearch.getExplanation(i.getPattern());
-                    tracebackResult.setText(explanation);
-                    break;
-                }
-            }
-            /*
-			String needle = tracebackEntry.getText();
-			if (needle.isEmpty()) // If string is empty, cancel
-				return;
-			ArrayList<Integer> result = BoyerMoore.search(needle, codeEntry.getText());
-			tracebackResult.setText(result.size() == 0 ? "String \"" + needle + "\" not found" : "String \"" + needle + "\" at " + result);
-		    */
+			Error error = InputParser.parseError(tracebackEntry.getText(), pSearch);
+			tracebackResult.setText("Oops!\n" +
+					"You made an error at line " + error.getLine() + ".\n" +
+					"The error was a " + error.getBmPattern().getPattern() + ".\n" +
+					"Explanation:\n" +
+					pSearch.getExplanation(error.getBmPattern().getPattern()));
 		});
 
 		// Add all objects in correct order
