@@ -75,7 +75,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         ArrayList<Number> result = new ArrayList<>();
         int m = needle.length();
         int offset = 0;
-        int searchArea = haystack.length() - needle.length() - 1;
+        int searchArea = haystack.length() - needle.length() + 1;
         while (offset < searchArea) {
             int i = m - 1;
             while (i >= 0 && needle.charAt(i) == haystack.charAt(offset + i))
