@@ -70,7 +70,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 		return precomputedSearch(needle, haystack, GSR, BCR);
 	}
 
-	private static ArrayList<Integer> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Integer> BCR) {
+	public static ArrayList<Integer> precomputedSearch(String needle, String haystack, int[] GSR, HashMap<Character, Integer> BCR) {
 		ArrayList<Integer> result = new ArrayList<>();
 		int m = needle.length();
 		int offset = 0;
@@ -96,6 +96,7 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
 	}
 
 	public static void main(String[] args) {
-		BoyerMoore.search("test", "test test test testing testing test test testing testing").forEach(System.out::println);
+		BoyerMoore.search("test", "test test test testing testing test test testing testing\n" +
+				"test test test test").forEach(System.out::println);
 	}
 }

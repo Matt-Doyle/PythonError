@@ -15,7 +15,7 @@ public class Python {
 	private ArrayList<BMPattern> exceptions;
 	private HashMap<String, String> explanations;
 
-	Python(boolean useDefaultExceptionList) {
+	public Python(boolean useDefaultExceptionList) {
 		exceptions = new ArrayList<>();
 		explanations = new HashMap<>();
 		if (useDefaultExceptionList) {
