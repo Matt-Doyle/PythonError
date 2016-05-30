@@ -89,6 +89,12 @@ public class BoyerMoore { // Implementation derived from http://www.cs.utexas.ed
         return result;
     }
 
+    public static BMPattern compile(String pattern) {
+        int[] GSR = GenerateGSRLookupTable(pattern);
+        HashMap<Character, Integer> BCR = GenerateBCRLookupTable(pattern);
+        return new BMPattern(pattern, BCR, GSR);
+    }
+
     public static void main(String[] args) {
         BoyerMoore.search("test", "testing testing testing").forEach(System.out::println);
     }
