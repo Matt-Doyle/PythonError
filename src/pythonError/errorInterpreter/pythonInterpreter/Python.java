@@ -4,19 +4,16 @@ package pythonError.errorInterpreter.pythonInterpreter;
  * Created by Matthew Doyle on 30/05/2016.
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import pythonError.errorInterpreter.errorSearch.BMPattern;
 import pythonError.errorInterpreter.errorSearch.BoyerMoore;
+import pythonError.errorInterpreter.inputPhaser.Error;
+
+import java.util.HashMap;
 
 public class Python {
 
-	private ArrayList<BMPattern> exceptions;
-	private HashMap<String, String> explanations;
+	private HashMap<String, Error> explanations;
 
 	public Python(boolean useDefaultExceptionList) {
-		exceptions = new ArrayList<>();
 		explanations = new HashMap<>();
 		if (useDefaultExceptionList) {
 			addException("BaseException", "The base class for all built-in exceptions. It is not meant to be directly inherited by user-defined classes (for that, use Exception). If str() is called on an instance of this class, the representation of the argument(s) to the instance are returned, or the empty string when there were no arguments.");
@@ -37,7 +34,9 @@ public class Python {
 			addException("ArithmeticError", "The base class for those built-in exceptions that are raised for various arithmetic errors: OverflowError, ZeroDivisionError, FloatingPointError.");
 			addException("FloatingPointError", "Raised when a floating point operation fails. This exception is always defined, but can only be raised when Python is configured with the --with-fpectl option, or the WANT_SIGFPE_HANDLER symbol is defined in the pyconfig.h file.");
 			addException("OverflowError", "Raised when the result of an arithmetic operation is too large to be represented. This cannot occur for integers (which would rather raise MemoryError than give up). However, for historical reasons, OverflowError is sometimes raised for integers that are outside a required range. Because of the lack of standardization of floating point exception handling in C, most floating point operations are not checked.");
-			addException("ZeroDivisionError", "Raised when the second argument of a division or modulo operation is zero. The associated value is a string indicating the type of the operands and the operation.");
+			addException("ZeroDivisionError", "Raised when the second argument of a division or modulo operation is zero. The associated value is a string indicating the type of the operands and the operation.",
+					"This error occurs when your program tries to divide a number by zero, which is not possible.",
+					"Check that you are not dividing a number by zero. Is it possible that any variables you are using are zero?");
 			addException("AssertionError", "Raised when an assert statement fails.");
 			addException("AttributeError", "Raised when an attribute reference (see Attribute references) or assignment fails. (When an object does not support attribute references or attribute assignments at all, TypeError is raised.)");
 			addException("BufferError", "Raised when a buffer related operation cannot be performed.");
@@ -104,17 +103,35 @@ public class Python {
 		}
 	}
 
-	public void addException(String Exception, String Explanation) { // Creates objects
-		exceptions.add(BoyerMoore.compile(Exception));
-		explanations.put(Exception, Explanation);
+	private void addException(String exception, String explanation) { // Creates objects
+		explanations.put(exception, new Error(BoyerMoore.compile(exception), explanation));
 	}
 
-	public ArrayList<BMPattern> getExceptionList() { // Returns list of exceptions
-		return exceptions;
+	private void addException(String exception, String explanation, String simpleExplanation, String solution) { // Creates objects
+		explanations.put(exception, new Error(BoyerMoore.compile(exception), explanation, simpleExplanation, solution));
 	}
 
-	public String getExplanation(String Exception) { // Returns the explanation for an exception
-		assert explanations.containsKey(Exception);
-		return explanations.get(Exception);
+	public HashMap<String, Error> getExplanations() {
+		return explanations;
+	}
+
+	public String getExplanation(String exception) { // Returns the explanation for an exception
+		assert explanations.containsKey(exception);
+		return explanations.get(exception).getExplanation();
+	}
+
+	public String getSimpleExplanation(String exception) { // Returns the simple explanation for an exception
+		assert explanations.containsKey(exception);
+		return explanations.get(exception).getSimpleExplanation();
+	}
+
+	public String getSolution(String exception) { // Returns the solution for an exception
+		assert explanations.containsKey(exception);
+		return explanations.get(exception).getSolution();
+	}
+
+	public Error getError(String exception) { // Returns the solution for an exception
+		assert explanations.containsKey(exception);
+		return explanations.get(exception);
 	}
 }

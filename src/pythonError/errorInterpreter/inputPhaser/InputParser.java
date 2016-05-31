@@ -1,6 +1,5 @@
 package pythonError.errorInterpreter.inputPhaser;
 
-import pythonError.errorInterpreter.errorSearch.BMPattern;
 import pythonError.errorInterpreter.errorSearch.BoyerMoore;
 import pythonError.errorInterpreter.pythonInterpreter.Python;
 
@@ -34,17 +33,17 @@ public class InputParser {
 		return lines;
 	}
 
-	public static Error parseError(String traceback, Python pSearch) {
-		BMPattern error = pSearch.getExceptionList().get(0);
-		for (BMPattern bmPattern : pSearch.getExceptionList()) {
-			ArrayList<Integer> CharacterPositions = BoyerMoore.precomputeSearch(bmPattern.getPattern(), traceback, bmPattern.getBCRTable(), bmPattern.getGSRTable());
+	public static LinedError parseError(String traceback, Python pSearch) {
+		Error error = pSearch.getError("BaseException");
+		for (Error thisError : pSearch.getExplanations().values()) {
+			ArrayList<Integer> CharacterPositions = BoyerMoore.precomputeSearch(thisError.getBmPattern().getPattern(), traceback, thisError.getBmPattern().getBCRTable(), thisError.getBmPattern().getGSRTable());
 			if (CharacterPositions.size() > 0) {
-				error = bmPattern;
+				error = pSearch.getError(thisError.getBmPattern().getPattern());
 				break;
 			}
 		}
 		ArrayList<String> tracebackWords = new ArrayList<>(Arrays.asList(traceback.split(" ")));
 		int lineNumber = Integer.parseInt(tracebackWords.get(tracebackWords.lastIndexOf("line") + 1).replace(",", ""));
-		return new Error(error, lineNumber);
+		return new LinedError(error, lineNumber);
 	}
 }

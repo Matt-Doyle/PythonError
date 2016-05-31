@@ -10,14 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import pythonError.errorInterpreter.inputPhaser.Error;
 import pythonError.errorInterpreter.inputPhaser.InputParser;
+import pythonError.errorInterpreter.inputPhaser.LinedError;
 import pythonError.errorInterpreter.pythonInterpreter.Python;
 
 public class UserInterfaceManager {
 
 	public void initialise(Stage primaryStage) {
-		primaryStage.setTitle("Python Error Interpreter - By Matthew Doyle and Christopher Hall");
+		primaryStage.setTitle("Python LinedError Interpreter - By Matthew Doyle and Christopher Hall");
 		Python pSearch = new Python(true);
 		// Create layout
 		VBox root = new VBox(12);
@@ -37,12 +37,16 @@ public class UserInterfaceManager {
 		Button analyseButton = new Button();
 		analyseButton.setText("Analyse Traceback");
 		analyseButton.setOnAction(event -> {
-			Error error = InputParser.parseError(tracebackEntry.getText(), pSearch);
+			LinedError error = InputParser.parseError(tracebackEntry.getText(), pSearch);
 			tracebackResult.setText("Oops!\n" +
 					"You made an error at line " + error.getLine() + ".\n" +
-					"The error was a " + error.getBmPattern().getPattern() + ".\n" +
-					"Explanation:\n" +
-					pSearch.getExplanation(error.getBmPattern().getPattern()));
+					"The error was a " + error.getBmPattern().getPattern());
+			if (error.getSimpleExplanation().isEmpty())
+				tracebackResult.appendText("Explanation:\n" + error.getExplanation() + '\n');
+			else
+				tracebackResult.appendText("Explanation:\n" + error.getSimpleExplanation() + '\n');
+			if (!error.getSolution().isEmpty())
+				tracebackResult.appendText("Solution:\n" + error.getSolution() + '\n');
 		});
 
 		// Add all objects in correct order

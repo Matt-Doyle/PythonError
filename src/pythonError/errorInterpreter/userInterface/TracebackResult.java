@@ -10,27 +10,31 @@ import javafx.scene.layout.VBox;
 
 public class TracebackResult {
 
-    private VirtualizedScrollPane nodeObject;
-    private InlineCssTextArea richTextEntry;
+	private VirtualizedScrollPane nodeObject;
+	private InlineCssTextArea richTextEntry;
 
-    public TracebackResult() {
-        richTextEntry = new InlineCssTextArea();
-        richTextEntry.setWrapText(true);
-        richTextEntry.setEditable(false);
+	public TracebackResult() {
+		richTextEntry = new InlineCssTextArea();
+		richTextEntry.setWrapText(true);
+		richTextEntry.setEditable(false);
 
-        nodeObject = new VirtualizedScrollPane(richTextEntry);
-    }
+		nodeObject = new VirtualizedScrollPane(richTextEntry);
+	}
 
-    public VirtualizedScrollPane getNodeObject() {
-        return nodeObject;
-    }
+	public VirtualizedScrollPane getNodeObject() {
+		return nodeObject;
+	}
 
-    public void setText(String strText) {
-        richTextEntry.clear();
-        richTextEntry.appendText(strText);
-    }
+	public void setText(String strText) {
+		richTextEntry.clear();
+		richTextEntry.appendText(strText);
+	}
 
-    public String getText() {
-        return richTextEntry.getText();
-    }
+	public void appendText(String strText) {
+		richTextEntry.appendText(strText);
+	}
+
+	public String getText() {
+		return richTextEntry.getText();
+	}
 }
