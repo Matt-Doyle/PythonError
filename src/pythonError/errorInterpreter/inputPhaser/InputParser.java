@@ -11,27 +11,11 @@ import java.util.Arrays;
  */
 public class InputParser {
 
-	public static ArrayList<Line> parseCode(String input) {
-		ArrayList<Line> lines = new ArrayList<>();
-		String[] linesAsStrings = input.split("\n");
-		for (String line : linesAsStrings) {
-			int indentation = 0;
-			while (input.startsWith("    ")) {
-				input = input.substring(4);
-				indentation++;
-			}
-			while (input.startsWith("  ")) {
-				input = input.substring(2);
-				indentation++;
-			}
-			while (input.startsWith("\t")) {
-				input = input.substring(1);
-				indentation++;
-			}
-			lines.add(new Line(input, indentation));
-		}
-		return lines;
-	}
+    public static ArrayList<Line> parseCode(String input) {
+        ArrayList<Line> lines = new ArrayList<>();
+        Arrays.stream(input.split("\n")).forEach(i -> lines.add(new Line(input))); // don't judge me, I just wanted this to look cool -Matt
+        return lines;
+    }
 
 	public static LinedError parseError(String traceback, Python pSearch) {
 		Error error = pSearch.getError("BaseException");
