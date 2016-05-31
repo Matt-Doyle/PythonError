@@ -40,30 +40,47 @@ class CodeParser {
     static String[] OPERATORS = {"+", "-", "*", "/", "//", "%", "**", "==", "!=", "<", ">", "<=", ">=", "is", "in", "and", "or", "not", "&", "|", "~", "^", "<<",
             ">>"};
     static String[] DELIMITERS = {};
+    static String[] LITERALS = {"int", "float", "imaginary", "string", "byte"};
 
-    private int isKeyword(String input, int i) {
+    private int getSubStrOffset(String input, String subStr, int offset) {
+        if (offset + (subStr.length() - 1) > input.length()) { // If offeset + the length of subStr is bigger than input return 0
+            return 0;
+        }
+        for (int j = 0; j < subStr.length(); j++) { // Loop through subStr and compare it to input
+            if (input.charAt(offset + j) != subStr.charAt(j)) {
+                return 0;
+            }
+        }
+        if (offset + subStr.length() > input.length()) { // If subStr goes right up until the end of input return a correct offset
+            return offset + subStr.length() - 1;
+        } else if (input.charAt(offset + subStr.length()) == ' ' || input.charAt(offset + subStr.length()) == '\n') { // If there is a space or new line after subStr return the correct offset
+            return offset + subStr.length() - 1;
+        }
+        return 0;
+    }
+
+    private int wordSearch(String input, int i, String[] searchTerms) {
         String currentChar = input.substring(i, i);
         if (currentChar.matches("[A-Za-z_]")) {
-            for (String keyWord : KEYWORDS) {
-                if (i + (keyWord.length() - 1) > input.length()) {
-                    continue;
-                }
-                for (int j = 0; j < keyWord.length(); j++) {
-                    if (input.charAt(i + j) != keyWord.charAt(j)) {
-                        continue;
-                    }
-                }
-                if (i + keyWord.length() > input.length()) {
-                    return i + keyWord.length() - 1;
-                } else if (input.charAt(i + keyWord.length()) == ' ' || input.charAt(i + keyWord.length()) == '\n') {
-                    return i + keyWord.length() - 1;
-                }
+            for (String keyWord : searchTerms) {
+                int offset = getSubStrOffset(input, keyWord, i);
+                if (offset > 0)
+                    return offset;
             }
         }
         return 0;
     }
 
+    private int isKeyword(String input, int i) {
+        return wordSearch(input, i, KEYWORDS);
+    }
+
+    private int isLiteral(String input, int i) {
+        return wordSearch(input, i, LITERALS);
+    }
+
     public ArrayList<Token> constructTokens(String input) {
+        input.replace(",\n", " ");
         input.replace("\\\n", " ");
 
 
@@ -77,7 +94,11 @@ class CodeParser {
             if (isNewLine) {
                 int keywordOffset = isKeyword(input, i);
                 if (keywordOffset > 0) {
-
+                    tokenList.add(new Token(tokens.keyWord));
+                    i += keywordOffset;
+                    break;
+                } else {
+                    int literalOffset = isLiteral(input, i);
                 }
             }
         }
