@@ -11,11 +11,13 @@ enum tokens {
     stringLiteral,
     number,
     comment,
+    indent,
+    dedent
 }
 
 public class Token {
     tokens type;
     public Token(tokens type) {
-
+        this.type = type;
     }
 }
