@@ -17,7 +17,7 @@ import pythonError.errorInterpreter.pythonInterpreter.Python;
 public class UserInterfaceManager {
 
 	public void initialise(Stage primaryStage) {
-		primaryStage.setTitle("Python LinedError Interpreter - By Matthew Doyle and Christopher Hall");
+		primaryStage.setTitle("Python Error Interpreter - By Matthew Doyle and Christopher Hall");
 		Python pSearch = new Python(true);
 		// Create layout
 		VBox root = new VBox(12);
