@@ -37,6 +37,10 @@ public class UserInterfaceManager {
 		Button analyseButton = new Button();
 		analyseButton.setText("Analyse Traceback");
 		analyseButton.setOnAction(event -> {
+			if (tracebackEntry.getText().isEmpty()) {
+				tracebackResult.setText("Please enter your error into the field above");
+				return;
+			}
 			LinedError error = InputParser.parseError(tracebackEntry.getText(), pSearch);
 			tracebackResult.setText("Oops!\n" +
 					"You made an error at line " + error.getLine() + ".\n" +

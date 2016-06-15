@@ -11,9 +11,22 @@ public class Line {
 	private String text;
 	private int indentation;
 
-	public Line(String text, int indentation) {
+	private static int getIndentationAmount(String input) {
+		int indentation = 0;
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (c != ' ' && c != '\t') {
+				break;
+			} else {
+				indentation++;
+			}
+		}
+		return indentation;
+	}
+
+	public Line(String text) {
 		this.text = text;
-		this.indentation = indentation;
+		this.indentation = getIndentationAmount(text);
 	}
 
 	public ArrayList<String> toStringArray() {
