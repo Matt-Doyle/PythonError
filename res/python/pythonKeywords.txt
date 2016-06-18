@@ -1,3 +1,6 @@
+False
+None
+True
 and
 as
 assert
@@ -9,7 +12,6 @@ del
 elif
 else
 except
-exec
 finally
 for
 from
@@ -19,6 +21,7 @@ import
 in
 is
 lambda
+nonlocal
 not
 or
 pass

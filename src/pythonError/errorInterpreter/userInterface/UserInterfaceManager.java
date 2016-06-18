@@ -56,7 +56,7 @@ public class UserInterfaceManager {
 		// Add all objects in correct order
 		root.getChildren().addAll(codeLabel, codeEntry.getNodeObject(), tracebackEntryLabel, tracebackEntry.getNodeObject(), analyseButton, traebackResultLabel, tracebackResult.getNodeObject());
 
-		Scene scene = new Scene(root, 500, 472);
+		Scene scene = new Scene(root);
 
 		String stylesheet = Class.class.getResource("/styles/python-highlighting.css").toExternalForm();
 		scene.getStylesheets().add(stylesheet);

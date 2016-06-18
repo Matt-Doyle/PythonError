@@ -48,6 +48,7 @@ public class CodeEntry {
 		});
 
 		nodeObject = new VirtualizedScrollPane(richTextEntry);
+		nodeObject.setPrefSize(800, 350);
 	}
 
 	private static StyleSpans<Collection<String>> computeHighlighting(

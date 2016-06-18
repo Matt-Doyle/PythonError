@@ -19,6 +19,7 @@ public class TracebackResult {
 		richTextEntry.setEditable(false);
 
 		nodeObject = new VirtualizedScrollPane(richTextEntry);
+		nodeObject.setPrefSize(700, 200);
 	}
 
 	public VirtualizedScrollPane getNodeObject() {
