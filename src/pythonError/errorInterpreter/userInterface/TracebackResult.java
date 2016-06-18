@@ -6,10 +6,8 @@ package pythonError.errorInterpreter.userInterface;
 
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.InlineCssTextArea;
-import org.fxmisc.richtext.StyleSpansBuilder;
 import pythonError.errorInterpreter.pythonInterpreter.Python;
 
-import java.util.Collection;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -41,7 +39,6 @@ public class TracebackResult {
 
 	private void computeHighlighting(String text) {
 		Matcher matcher = PATTERN.matcher(text);
-		StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
 		while (matcher.find()) {
 			String styleClass = matcher.group("EXCEPTION") != null ? "red" : matcher
 					.group("LINENUMBER") != null ? "bold" : matcher
