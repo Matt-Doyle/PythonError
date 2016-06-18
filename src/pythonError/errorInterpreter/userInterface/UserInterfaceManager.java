@@ -12,13 +12,11 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import pythonError.errorInterpreter.inputPhaser.InputParser;
 import pythonError.errorInterpreter.inputPhaser.LinedError;
-import pythonError.errorInterpreter.pythonInterpreter.Python;
 
 public class UserInterfaceManager {
 
 	public void initialise(Stage primaryStage) {
 		primaryStage.setTitle("Python Error Interpreter - By Matthew Doyle and Christopher Hall");
-		Python pSearch = new Python(true);
 		// Create layout
 		VBox root = new VBox(12);
 		root.setPadding(new Insets(12));
@@ -41,10 +39,10 @@ public class UserInterfaceManager {
 				tracebackResult.setText("Please enter your error into the field above");
 				return;
 			}
-			LinedError error = InputParser.parseError(tracebackEntry.getText(), pSearch);
+			LinedError error = InputParser.parseError(tracebackEntry.getText());
 			tracebackResult.setText("Oops!\n" +
 					"You made an error at line " + error.getLine() + ".\n" +
-					"The error was a " + error.getBmPattern().getPattern());
+					"The error was a " + error.getBmPattern().getPattern() + ".\n");
 			if (error.getSimpleExplanation().isEmpty())
 				tracebackResult.appendText("Explanation:\n" + error.getExplanation() + '\n');
 			else
