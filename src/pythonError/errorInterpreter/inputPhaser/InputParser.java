@@ -18,12 +18,12 @@ public class InputParser {
         return lines;
     }
 
-	public static LinedError parseError(String traceback, Python pSearch) {
-		Error error = pSearch.getError("BaseException");
-		for (Error thisError : pSearch.getExplanations().values()) {
+	public static LinedError parseError(String traceback) {
+		Error error = Python.getError("BaseException");
+		for (Error thisError : Python.getExplanations().values()) {
 			ArrayList<Integer> CharacterPositions = BoyerMoore.precomputeSearch(thisError.getBmPattern().getPattern(), traceback, thisError.getBmPattern().getBCRTable(), thisError.getBmPattern().getGSRTable());
 			if (CharacterPositions.size() > 0) {
-				error = pSearch.getError(thisError.getBmPattern().getPattern());
+				error = Python.getError(thisError.getBmPattern().getPattern());
 				break;
 			}
 		}
