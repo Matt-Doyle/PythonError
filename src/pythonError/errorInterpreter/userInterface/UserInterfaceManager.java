@@ -49,6 +49,7 @@ public class UserInterfaceManager {
 				tracebackResult.appendText("Explanation:\n" + error.getSimpleExplanation() + '\n');
 			if (!error.getSolution().isEmpty())
 				tracebackResult.appendText("Solution:\n" + error.getSolution() + '\n');
+			codeEntry.highlightErrorLine(error.getLine() - 1);
 		});
 
 		// Add all objects in correct order

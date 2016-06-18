@@ -30,10 +30,8 @@ public class CodeEntry {
 	private static final String STRING_PATTERN_DOUBLE = "\"([^\"\\\\]|\\\\.)*\"";
 	private static final String STRING_PATTERN_SINGLE = "'([^'\\\\]|\\\\.)*'";
 	private static final String COMMENT_PATTERN = "#.*(\\n|\\z)";
-	private static final Pattern PATTERN = Pattern.compile("(?<KEYWORD>" + KEYWORD_PATTERN + ")"
-			+ "|(?<BUILTINFUNCTION>" + BUILT_IN_FUNCTION_PATTERN + ")"
-			+ "|(?<STRING>" + STRING_PATTERN_DOUBLE + "|" + STRING_PATTERN_SINGLE + ")"
-			+ "|(?<COMMENT>" + COMMENT_PATTERN + ")");
+
+	private static Pattern pattern;
 
 	public CodeEntry() {
 		richTextEntry = new CodeArea();
@@ -44,34 +42,51 @@ public class CodeEntry {
 
 		richTextEntry.setParagraphGraphicFactory(LineNumberFactory.get(richTextEntry, format));
 		richTextEntry.textProperty().addListener((obs, oldText, newText) -> {
-			richTextEntry.setStyleSpans(0, computeHighlighting(newText));
+			richTextEntry.setStyleSpans(0, computeHighlighting(newText, -1));
 		});
 
 		nodeObject = new VirtualizedScrollPane(richTextEntry);
 		nodeObject.setPrefSize(800, 350);
 	}
 
-	private static StyleSpans<Collection<String>> computeHighlighting(
-			String text) {
-		Matcher matcher = PATTERN.matcher(text);
+	public StyleSpans<Collection<String>> computeHighlighting(String text, int errorLineNumber) {
+		String errorPattern;
+		if (errorLineNumber > -1 && errorLineNumber <= text.length() + 1 && !richTextEntry.getText(errorLineNumber).isEmpty())
+			errorPattern = richTextEntry.getText(errorLineNumber);
+		else
+			errorPattern = "hopefullythistextwillneverreallybeintheinput";
+		errorPattern = errorPattern.replaceAll("\\(", "\\\\\\(");
+		errorPattern = errorPattern.replaceAll("\\)", "\\\\\\)");
+		errorPattern = errorPattern.replaceAll("\\{", "\\\\\\{");
+		errorPattern = errorPattern.replaceAll("\\}", "\\\\\\}");
+		errorPattern = errorPattern.replaceAll("\\[", "\\\\\\[");
+		errorPattern = errorPattern.replaceAll("\\]", "\\\\\\]");
+		pattern = Pattern.compile("(?<ERROR>" + errorPattern + ")"
+				+ "|(?<KEYWORD>" + KEYWORD_PATTERN + ")"
+				+ "|(?<BUILTINFUNCTION>" + BUILT_IN_FUNCTION_PATTERN + ")"
+				+ "|(?<STRING>" + STRING_PATTERN_DOUBLE + "|" + STRING_PATTERN_SINGLE + ")"
+				+ "|(?<COMMENT>" + COMMENT_PATTERN + ")");
+		Matcher matcher = pattern.matcher(text);
 		int lastKwEnd = 0;
 		StyleSpansBuilder<Collection<String>> spansBuilder = new StyleSpansBuilder<>();
 		while (matcher.find()) {
-			String styleClass = matcher.group("KEYWORD") != null ? "keyword" : matcher
+			String styleClass = matcher.group("ERROR") != null ? "error" : matcher
+					.group("KEYWORD") != null ? "keyword" : matcher
 					.group("BUILTINFUNCTION") != null ? "built-in-function" : matcher
 					.group("COMMENT") != null ? "comment" : matcher
 					.group("STRING") != null ? "string" : null; /* never happens */
 			assert styleClass != null;
-			spansBuilder.add(Collections.emptyList(), matcher.start()
-					- lastKwEnd);
-			spansBuilder.add(Collections.singleton(styleClass), matcher.end()
-					- matcher.start());
+			spansBuilder.add(Collections.emptyList(), matcher.start() - lastKwEnd);
+			spansBuilder.add(Collections.singleton(styleClass), matcher.end() - matcher.start());
 			lastKwEnd = matcher.end();
 		}
 		spansBuilder.add(Collections.emptyList(), text.length() - lastKwEnd);
 		return spansBuilder.create();
 	}
 
+	public void highlightErrorLine(int errorLine) {
+		richTextEntry.setStyleSpans(0, computeHighlighting(richTextEntry.getText(), errorLine));
+	}
 
 	public VirtualizedScrollPane getNodeObject() {
 		return nodeObject;

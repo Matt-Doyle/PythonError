@@ -12,3 +12,6 @@
 .comment {
     -fx-fill: #DD0000;
 }
+.error {
+    -fx-background-fill: #DD8888;
+}
