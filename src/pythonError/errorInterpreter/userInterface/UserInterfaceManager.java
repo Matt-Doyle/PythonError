@@ -31,7 +31,7 @@ public class UserInterfaceManager {
 		// Labels
 		Label codeLabel = new Label("Enter your python code here:");
 		Label tracebackEntryLabel = new Label("Enter your traceback error here:");
-		Label traebackResultLabel = new Label("Result:");
+		Label tracebackResultLabel = new Label("Result:");
 
 		// Buttons
 		Button analyseButton = new Button();
@@ -55,7 +55,7 @@ public class UserInterfaceManager {
 		});
 
 		// Add all objects in correct order
-		root.getChildren().addAll(codeLabel, codeEntry.getNodeObject(), tracebackEntryLabel, tracebackEntry.getNodeObject(), analyseButton, traebackResultLabel, tracebackResult.getNodeObject());
+		root.getChildren().addAll(codeLabel, codeEntry.getNodeObject(), tracebackEntryLabel, tracebackEntry.getNodeObject(), analyseButton, tracebackResultLabel, tracebackResult.getNodeObject());
 
 		Scene scene = new Scene(root);
 
