@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import pythonError.errorInterpreter.inputPhaser.InputParser;
 import pythonError.errorInterpreter.inputPhaser.LinedError;
 
+import java.util.Objects;
+
 public class UserInterfaceManager {
 
 	public void initialise(Stage primaryStage) {
@@ -43,11 +45,11 @@ public class UserInterfaceManager {
 			tracebackResult.setText("Oops!\n" +
 					"You made an error at line " + error.getLine() + ".\n" +
 					"The error was a " + error.getBmPattern().getPattern() + ".\n");
-			if (error.getSimpleExplanation().isEmpty())
+			if (error.getSimpleExplanation().isEmpty() || Objects.equals(error.getSimpleExplanation(), "null"))
 				tracebackResult.appendText("Explanation:\n" + error.getExplanation() + '\n');
 			else
 				tracebackResult.appendText("Explanation:\n" + error.getSimpleExplanation() + '\n');
-			if (!error.getSolution().isEmpty())
+			if (!error.getSolution().isEmpty() && !Objects.equals(error.getSolution(), "null"))
 				tracebackResult.appendText("Solution:\n" + error.getSolution() + '\n');
 			codeEntry.highlightErrorLine(error.getLine() - 1);
 		});

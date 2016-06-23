@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language>
+    <exception>
+        <name>BaseException</name>
+        <explanation>The base class for all built-in exceptions. It is not meant to be directly inherited by user-defined classes (for that, use Exception). If str() is called on an instance of this class, the representation of the argument(s) to the instance are returned, or the empty string when there were no arguments.</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>SystemExit</name>
+        <explanation>
+            "This exception is raised by the sys.exit() function. It inherits from BaseException instead of Exception so that it is not accidentally caught by code that catches Exception. This allows the exception to properly propagate up and cause the interpreter to exit. When it is not handled, the Python interpreter exits; no stack traceback is printed. The constructor accepts the same optional argument passed to sys.exit(). If the value is an integer, it specifies the system exit status (passed to C’s exit() function); if it is None, the exit status is zero; if it has another type (such as a string), the object’s value is printed and the exit status is one.\n"
+            "A call to sys.exit() is translated into an exception so that clean-up handlers (finally clauses of try statements) can be executed, and so that a debugger can execute a script without running the risk of losing control. The os._exit() function can be used if it is absolutely positively necessary to exit immediately (for example, in the child process after a call to os.fork())."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>KeyboardInterrupt</name>
+        <explanation>"Raised when the user hits the interrupt key (normally Control-C or Delete). During execution, a check for interrupts is made regularly. The exception inherits from BaseException so as to not be accidentally caught by code that catches Exception and thus prevent the interpreter from exiting."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>GeneratorExit</name>
+        <explanation>"Raised when a generator or coroutine is closed; see generator.close() and coroutine.close(). It directly inherits from BaseException instead of Exception since it is technically not an error."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>Exception</name>
+        <explanation>"All built-in, non-system-exiting exceptions are derived from this class. All user-defined exceptions should also be derived from this class."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>StopIteration</name>
+        <explanation>"Raised by built-in function next() and an iterator‘s __next__() method to signal that there are no further items produced by the iterator.\n"
+            "The exception object has a single attribute value, which is given as an argument when constructing the exception, and defaults to None.\n"
+            "When a generator or coroutine function returns, a new StopIteration instance is raised, and the value returned by the function is used as the value parameter to the constructor of the exception.\n"
+            "If a generator function defined in the presence of a from __future__ import generator_stop directive raises StopIteration, it will be converted into a RuntimeError (retaining the StopIteration as the new exception’s cause)."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>StopAsyncIteration</name>
+        <explanation>"Must be raised by __anext__() method of an asynchronous iterator object to stop the iteration."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ArithmeticError</name>
+        <explanation>"The base class for those built-in exceptions that are raised for various arithmetic errors: OverflowError, ZeroDivisionError, FloatingPointError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>FloatingPointError</name>
+        <explanation>"Raised when a floating point operation fails. This exception is always defined, but can only be raised when Python is configured with the --with-fpectl option, or the WANT_SIGFPE_HANDLER symbol is defined in the pyconfig.h file."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>OverflowError</name>
+        <explanation>"Raised when the result of an arithmetic operation is too large to be represented. This cannot occur for integers (which would rather raise MemoryError than give up). However, for historical reasons, OverflowError is sometimes raised for integers that are outside a required range. Because of the lack of standardization of floating point exception handling in C, most floating point operations are not checked."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ZeroDivisionError</name>
+        <explanation>Raised when the second argument of a division or modulo operation is zero. The associated value is a string indicating the type of the operands and the operation.</explanation>
+        <simple-explanation>This error occurs when your program tries to divide a number by zero, which is not possible.</simple-explanation>
+        <solution>Check that you are not dividing a number by zero. Is it possible that any variables you are using are zero?</solution>
+    </exception>
+    <exception>
+        <name>AssertionError</name>
+        <explanation>"Raised when an assert statement fails."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>AttributeError</name>
+        <explanation>"Raised when an attribute reference (see Attribute references) or assignment fails. (When an object does not support attribute references or attribute assignments at all, TypeError is raised.)"</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>BufferError</name>
+        <explanation>"Raised when a buffer related operation cannot be performed."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>EOFError</name>
+        <explanation>"Raised when the input() function hits an end-of-file condition (EOF) without reading any data. (N.B.: the io.IOBase.read() and io.IOBase.readline() methods return an empty string when they hit EOF.)"</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ImportError</name>
+        <explanation>
+            "Raised when an import statement fails to find the module definition or when a from ... import fails to find a name that is to be imported.\n"
+            "The name and path attributes can be set using keyword-only arguments to the constructor. When set they represent the name of the module that was attempted to be imported and the path to any file which triggered the exception, respectively."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>LookupError</name>
+        <explanation>"The base class for the exceptions that are raised when a key or index used on a mapping or sequence is invalid: IndexError, KeyError. This can be raised directly by codecs.lookup()."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>IndexError</name>
+        <explanation>"Raised when a sequence subscript is out of range. (Slice indices are silently truncated to fall in the allowed range; if an index is not an integer, TypeError is raised.)"</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>KeyError</name>
+        <explanation>"Raised when a mapping (dictionary) key is not found in the set of existing keys."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>MemoryError</name>
+        <explanation>"Raised when an operation runs out of memory but the situation may still be rescued (by deleting some objects). The associated value is a string indicating what kind of (internal) operation ran out of memory. Note that because of the underlying memory management architecture (C’s malloc() function), the interpreter may not always be able to completely recover from this situation; it nevertheless raises an exception so that a stack traceback can be printed, in case a run-away program was the cause."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>NameError</name>
+        <explanation>"Raised when a local or global name is not found. This applies only to unqualified names. The associated value is an error message that includes the name that could not be found."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnboundLocalError</name>
+        <explanation>"Raised when a reference is made to a local variable in a function or method, but no value has been bound to that variable. This is a subclass of NameError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>OSError</name>
+        <explanation>
+            "This exception is raised when a system function returns a system-related error, including I/O failures such as “file not found” or “disk full” (not for illegal argument types or other incidental errors).\n"
+            "The second form of the constructor sets the corresponding attributes, described below. The attributes default to None if not specified. For backwards compatibility, if three arguments are passed, the args attribute contains only a 2-tuple of the first two constructor arguments.\n"
+            "The constructor often actually returns a subclass of OSError, as described in OS exceptions below. The particular subclass depends on the final errno value. This behaviour only occurs when constructing OSError directly or via an alias, and is not inherited when subclassing."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>BlockingIOError</name>
+        <explanation>"Raised when an operation would block on an object (e.g. socket) set for non-blocking operation. Corresponds to errno EAGAIN, EALREADY, EWOULDBLOCK and EINPROGRESS."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ChildProcessError</name>
+        <explanation>"Raised when an operation on a child process failed. Corresponds to errno ECHILD."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ConnectionError</name>
+        <explanation>"A base class for connection-related issues."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>BrokenPipeError</name>
+        <explanation>"A subclass of ConnectionError, raised when trying to write on a pipe while the other end has been closed, or trying to write on a socket which has been shutdown for writing. Corresponds to errno EPIPE and ESHUTDOWN."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ConnectionAbortedError</name>
+        <explanation>"A subclass of ConnectionError, raised when a connection attempt is aborted by the peer. Corresponds to errno ECONNABORTED."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ConnectionRefusedError</name>
+        <explanation>"A subclass of ConnectionError, raised when a connection attempt is refused by the peer. Corresponds to errno ECONNREFUSED."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ConnectionResetError</name>
+        <explanation>"A subclass of ConnectionError, raised when a connection is reset by the peer. Corresponds to errno ECONNRESET."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>FileExistsError</name>
+        <explanation>"Raised when trying to create a file or directory which already exists. Corresponds to errno EEXIST."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>FileNotFoundError</name>
+        <explanation>"Raised when a file or directory is requested but doesn’t exist. Corresponds to errno ENOENT."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>InterruptedError</name>
+        <explanation>"Raised when a system call is interrupted by an incoming signal. Corresponds to errno EINTR."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>IsADirectoryError</name>
+        <explanation>"Raised when a file operation (such as os.remove()) is requested on a directory. Corresponds to errno EISDIR."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>NotADirectoryError</name>
+        <explanation>"Raised when a directory operation (such as os.listdir()) is requested on something which is not a directory. Corresponds to errno ENOTDIR."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>PermissionError</name>
+        <explanation>"Raised when trying to run an operation without the adequate access rights - for example filesystem permissions. Corresponds to errno EACCES and EPERM."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ProcessLookupError</name>
+        <explanation>"Raised when a given process doesn’t exist. Corresponds to errno ESRCH."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>TimeoutError</name>
+        <explanation>"Raised when a system function timed out at the system level. Corresponds to errno ETIMEDOUT."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ReferenceError</name>
+        <explanation>"This exception is raised when a weak reference proxy, created by the weakref.proxy() function, is used to access an attribute of the referent after it has been garbage collected. For more information on weak references, see the weakref module."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>RuntimeError</name>
+        <explanation>"Raised when an error is detected that doesn’t fall in any of the other categories. The associated value is a string indicating what precisely went wrong."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>NotImplementedError</name>
+        <explanation>"This exception is derived from RuntimeError. In user defined base classes, abstract methods should raise this exception when they require derived classes to override the method."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>RecursionError</name>
+        <explanation>"This exception is derived from RuntimeError. It is raised when the interpreter detects that the maximum recursion depth (see sys.getrecursionlimit()) is exceeded."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>SyntaxError</name>
+        <explanation>
+            "Raised when the parser encounters a syntax error. This may occur in an import statement, in a call to the built-in functions exec() or eval(), or when reading the initial script or standard input (also interactively).\n"
+            "Instances of this class have attributes filename, lineno, offset and text for easier access to the details. str() of the exception instance returns only the message."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>IndentationError</name>
+        <explanation>"Base class for syntax errors related to incorrect indentation. This is a subclass of SyntaxError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>TabError</name>
+        <explanation>"Raised when indentation contains an inconsistent use of tabs and spaces. This is a subclass of IndentationError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>SystemError</name>
+        <explanation>
+            "Raised when the interpreter finds an internal error, but the situation does not look so serious to cause it to abandon all hope. The associated value is a string indicating what went wrong (in low-level terms).\n"
+            "You should report this to the author or maintainer of your Python interpreter. Be sure to report the version of the Python interpreter (sys.version; it is also printed at the start of an interactive Python session), the exact error message (the exception’s associated value) and if possible the source of the program that triggered the error."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>TypeError</name>
+        <explanation>"Raised when an operation or function is applied to an object of inappropriate type. The associated value is a string giving details about the type mismatch."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ValueError</name>
+        <explanation>"Raised when a built-in operation or function receives an argument that has the right type but an inappropriate value, and the situation is not described by a more precise exception such as IndexError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnicodeError</name>
+        <explanation>
+            "Raised when a Unicode-related encoding or decoding error occurs. It is a subclass of ValueError.\n"
+            "UnicodeError has attributes that describe the encoding or decoding error. For example, err.object[err.start:err.end] gives the particular invalid input that the codec failed on."
+        </explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnicodeDecodeError</name>
+        <explanation>"Raised when a Unicode-related error occurs during decoding. It is a subclass of UnicodeError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnicodeEncodeError</name>
+        <explanation>"Raised when a Unicode-related error occurs during encoding. It is a subclass of UnicodeError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnicodeTranslateError</name>
+        <explanation>"Raised when a Unicode-related error occurs during translating. It is a subclass of UnicodeError."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>Warning</name>
+        <explanation>"Base class for warning categories."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>DeprecationWarning</name>
+        <explanation>"Base class for warnings about deprecated features."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>PendingDeprecationWarning</name>
+        <explanation>"Base class for warnings about features which will be deprecated in the future."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>RuntimeWarning</name>
+        <explanation>"Base class for warnings about dubious runtime behavior."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>SyntaxWarning</name>
+        <explanation>"Base class for warnings about dubious syntax."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UserWarning</name>
+        <explanation>"Base class for warnings generated by user code."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>FutureWarning</name>
+        <explanation>"Base class for warnings about constructs that will change semantically in the future."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ImportWarning</name>
+        <explanation>"Base class for warnings about probable mistakes in module imports."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>UnicodeWarning</name>
+        <explanation>"Base class for warnings related to Unicode."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+    <exception>
+        <name>ResourceWarning</name>
+        <explanation>"Base class for warnings related to resource usage."</explanation>
+        <simple-explanation>null</simple-explanation>
+        <solution>null</solution>
+    </exception>
+</language>
